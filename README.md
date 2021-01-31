@@ -1,9 +1,12 @@
 # Conway's Game of Life
-C# / .NET Core implementation using xUnit
-
-Video Process - https://youtu.be/zCICgSysF5E
 ## About
 Well known cell automation game best described at https://www.conwaylife.com/
+## Preview
+![alt text](https://github.com/antony-jekov/game-of-life-tdd/blob/main/images/patterns.gif?raw=true)
+## Description
+C# / .NET Core implementation with xUnit
+
+Video Process - https://youtu.be/zCICgSysF5E
 ## Rules
 ### Cells
 The world in Conway's game is **2 dimentional** where each cell takes up **one space** on the grid. Cells are either `dead` or `alive`.

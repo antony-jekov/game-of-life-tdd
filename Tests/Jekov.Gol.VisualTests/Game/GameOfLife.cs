@@ -11,7 +11,7 @@ namespace Jekov.Gol.VisualTests.Game
 
         public GameOfLife()
         {
-            IEnumerable<Location> pattern = new RlePattern(Patterns.Lidka);
+            IEnumerable<Location> pattern = new RlePattern(Patterns.AlternateWichStrecher1);
             pattern = PatternUtils.OriginToCenter(pattern);
             _field = new HashSet<Location>(pattern);
             _runner = new LifeRunner(_field);

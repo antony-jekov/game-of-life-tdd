@@ -20,7 +20,7 @@ namespace Jekov.Gol.VisualTests
             {
                 renderer.Draw(game.Cells);
 
-                await Task.Delay(200);
+                await Task.Delay(16);
 
                 game.Tick();
             }

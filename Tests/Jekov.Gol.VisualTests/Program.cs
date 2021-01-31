@@ -12,7 +12,7 @@ namespace Jekov.Gol.VisualTests
             var width = Console.WindowWidth;
             var height = Console.WindowHeight;
 
-            var origin = new Location((width / 2), (height / 2));
+            var origin = new Cell((width / 2), (height / 2));
             var renderer = new Renderer(width, height, origin);
             var game = new GameOfLife();
 

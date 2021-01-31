@@ -5,12 +5,12 @@ namespace Jekov.Gol.Core
 {
     public class LifeRunner
     {
-        private readonly ICollection<Location> _cells;
-        private readonly ICollection<Location> _lostCellsTemp = new List<Location>();
-        private readonly ICollection<Location> _newCellsTemp = new HashSet<Location>();
-        private readonly ICollection<Location> _potentialNeighboursTemp = new HashSet<Location>();
+        private readonly ICollection<Cell> _cells;
+        private readonly ICollection<Cell> _lostCellsTemp = new List<Cell>();
+        private readonly ICollection<Cell> _newCellsTemp = new HashSet<Cell>();
+        private readonly ICollection<Cell> _checkedNeighboursTemp = new HashSet<Cell>();
 
-        public LifeRunner(ICollection<Location> cells) =>
+        public LifeRunner(ICollection<Cell> cells) =>
             _cells = cells ?? throw new ArgumentNullException(nameof(cells));
 
         public void RunCycle()
@@ -22,7 +22,7 @@ namespace Jekov.Gol.Core
             AddNewCells(newCells);
         }
 
-        private void AddNewCells(IEnumerable<Location> newCells)
+        private void AddNewCells(IEnumerable<Cell> newCells)
         {
             foreach (var cell in newCells)
             {
@@ -30,7 +30,7 @@ namespace Jekov.Gol.Core
             }
         }
 
-        private IEnumerable<Location> CollectLostCells()
+        private IEnumerable<Cell> CollectLostCells()
         {
             _lostCellsTemp.Clear();
 
@@ -46,21 +46,21 @@ namespace Jekov.Gol.Core
             return _lostCellsTemp;
         }
 
-        private IEnumerable<Location> CollectNewCells()
+        private IEnumerable<Cell> CollectNewCells()
         {
             _newCellsTemp.Clear();
-            _potentialNeighboursTemp.Clear();
+            _checkedNeighboursTemp.Clear();
 
             foreach (var cell in _cells)
             {
-                CollectReproducedNeighbours(cell, _newCellsTemp, _potentialNeighboursTemp);
+                CollectReproducedNeighbours(cell, _newCellsTemp, _checkedNeighboursTemp);
             }
 
             return _newCellsTemp;
         }
 
         private void CollectReproducedNeighbours(
-            Location cell, ICollection<Location> newCells, ICollection<Location> checkedCells)
+            Cell cell, ICollection<Cell> newCells, ICollection<Cell> checkedCells)
         {
             var potentialNeighbours = GetPotentialNeighbours(cell);
 
@@ -80,11 +80,11 @@ namespace Jekov.Gol.Core
             }
         }
 
-        private int CountNeighbours(Location cell)
+        private int CountNeighbours(Cell cell)
         {
             var count = 0;
 
-            foreach (Location neighbour in cell.Neighbours)
+            foreach (Cell neighbour in cell.Neighbours)
             {
                 count += _cells.Contains(neighbour) ? 1 : 0;
             }
@@ -92,7 +92,7 @@ namespace Jekov.Gol.Core
             return count;
         }
 
-        private IEnumerable<Location> GetPotentialNeighbours(Location cell)
+        private IEnumerable<Cell> GetPotentialNeighbours(Cell cell)
         {
             foreach (var neighbour in cell.Neighbours)
             {
@@ -103,7 +103,7 @@ namespace Jekov.Gol.Core
             }
         }
 
-        private void RemoveLostCells(IEnumerable<Location> lostCells)
+        private void RemoveLostCells(IEnumerable<Cell> lostCells)
         {
             foreach (var cell in lostCells)
             {

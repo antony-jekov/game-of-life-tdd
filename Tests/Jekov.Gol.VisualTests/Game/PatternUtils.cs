@@ -7,7 +7,7 @@ namespace Jekov.Gol.VisualTests.Game
 {
     internal class PatternUtils
     {
-        internal static IEnumerable<Location> OriginToCenter(IEnumerable<Location> pattern)
+        internal static IEnumerable<Cell> OriginToCenter(IEnumerable<Cell> pattern)
         {
             var cells = pattern.ToArray();
 
@@ -27,7 +27,7 @@ namespace Jekov.Gol.VisualTests.Game
             var width = (maxX - minX) + 1;
             var height = (maxY - minY) + 2;
 
-            var offset = new Location(width / 2, height / 2);
+            var offset = new Cell(width / 2, height / 2);
 
             foreach (var cell in cells)
             {

@@ -6,18 +6,18 @@ namespace Jekov.Gol.VisualTests.Game
 {
     internal class GameOfLife
     {
-        private readonly ISet<Location> _field;
+        private readonly ISet<Cell> _field;
         private readonly LifeRunner _runner;
 
         public GameOfLife()
         {
-            IEnumerable<Location> pattern = new RlePattern(Patterns.AlternateWichStrecher1);
+            IEnumerable<Cell> pattern = new RlePattern(Patterns.AlternateWichStrecher1);
             pattern = PatternUtils.OriginToCenter(pattern);
-            _field = new HashSet<Location>(pattern);
+            _field = new HashSet<Cell>(pattern);
             _runner = new LifeRunner(_field);
         }
 
-        public IEnumerable<Location> Cells => _field;
+        public IEnumerable<Cell> Cells => _field;
 
         internal void Tick()
         {

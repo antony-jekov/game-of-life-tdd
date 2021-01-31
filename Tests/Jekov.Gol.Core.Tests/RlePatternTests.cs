@@ -59,7 +59,7 @@ namespace Jekov.Gol.Core.Tests
         {
             var pattern = new RlePattern(data);
 
-            Assert.Equal(new Location(x, y), pattern.Last());
+            Assert.Equal(new Cell(x, y), pattern.Last());
         }
     }
 }

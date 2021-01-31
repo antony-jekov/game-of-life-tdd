@@ -8,7 +8,7 @@ namespace Jekov.Gol.Core.Tests.Data.LifeRunner
         {
             foreach (var neighbour in Neighbours)
             {
-                yield return new object[] { Cell, new Location[] { neighbour } };
+                yield return new object[] { Cell, new Cell[] { neighbour } };
             }
         }
     }

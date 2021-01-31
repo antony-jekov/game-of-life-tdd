@@ -9,14 +9,14 @@ namespace Jekov.Gol.VisualTests.Game
         private const char AliveCellChar = 'X';
         private const char ClearChar = ' ';
 
-        private readonly Location _origin;
+        private readonly Cell _origin;
         private readonly int _height;
         private readonly int _width;
 
-        private HashSet<Location> _previous =
-            new HashSet<Location>();
+        private HashSet<Cell> _previous =
+            new HashSet<Cell>();
 
-        public Renderer(int width, int height, Location origin = default)
+        public Renderer(int width, int height, Cell origin = default)
         {
             _width = width;
             _height = height;
@@ -32,9 +32,9 @@ namespace Jekov.Gol.VisualTests.Game
             Console.SetCursorPosition(0, 0);
         }
 
-        internal void Draw(IEnumerable<Location> cells)
+        internal void Draw(IEnumerable<Cell> cells)
         {
-            var dirtyCells = new List<Location>();
+            var dirtyCells = new List<Cell>();
 
             foreach (var cell in cells)
             {
@@ -49,10 +49,10 @@ namespace Jekov.Gol.VisualTests.Game
 
             CleanDirty();
 
-            _previous = new HashSet<Location>(dirtyCells);
+            _previous = new HashSet<Cell>(dirtyCells);
         }
 
-        private static void DrawCell(Location location, char cell)
+        private static void DrawCell(Cell location, char cell)
         {
             Console.SetCursorPosition(location.X, location.Y);
             Console.Write(cell);
@@ -68,8 +68,8 @@ namespace Jekov.Gol.VisualTests.Game
             _previous.Clear();
         }
 
-        private bool IsContained(Location location) =>
-            location.X >= 0 && location.X < _width &&
-            location.Y >= 0 && location.Y < _height;
+        private bool IsContained(Cell cell) =>
+            cell.X >= 0 && cell.X < _width &&
+            cell.Y >= 0 && cell.Y < _height;
     }
 }
